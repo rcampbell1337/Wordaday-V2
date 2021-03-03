@@ -84,7 +84,7 @@ module.exports = class Album
             let rand_album = functions.getRandomInt(length_list);
             let key = Object.keys(this.album_list)[rand_album];
             let album = this.album_list[key];
-            this.msg.channel.send(functions.Embeds.addFields(
+            this.msg.channel.send(functions.getEmbed().addFields(
                 { name: "Your chosen album is...", value: album + "!!!" }
             ));
             this.msg.channel.send("<:hypers:784503728341647430>");

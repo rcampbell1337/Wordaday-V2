@@ -46,7 +46,7 @@ module.exports = class Information
     // Display all of the functions of wordaday
     getHelp()
     {
-        this.msg.channel.send(functions.Embeds.addFields(
+        this.msg.channel.send(functions.getEmbed().addFields(
             { name: "Command List", value: 'All commands start with B!' },
             { name: "Memes", value: "simp, jojo, opm, sucks" },
             { name: "Numerical functions", value: "bin, oct, hex" },

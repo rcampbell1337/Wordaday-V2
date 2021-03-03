@@ -40,7 +40,7 @@ module.exports = class Rock
             let x = functions.getRandomInt(text.length);
             let newImageSize = image[x];
 
-            msg.channel.send(functions.Embeds.setImage(newImageSize).addFields(
+            msg.channel.send(functions.getEmbed().setImage(newImageSize).addFields(
                 { name: "Guess the rock!!!", value: "WHAT COULD IT BE?! (Type your guess after the B!guess keyword!)" }
             ));
             this.setRock(text[x]);

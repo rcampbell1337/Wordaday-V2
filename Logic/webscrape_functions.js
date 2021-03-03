@@ -17,7 +17,7 @@ module.exports = class Webscraper
     getCodeChallenge()
     {
         let z = functions.getRandomInt(description.length);
-        this.msg.channel.send(functions.Embeds.setImage(null).addFields(
+        this.msg.channel.send(functions.getEmbed().setImage(null).addFields(
             { name: titles[z], value: description[z]}
         ));
     }
@@ -58,7 +58,7 @@ module.exports = class Webscraper
             await page.goto(url);
             const txt = await page.evaluate(() => Array.from(document.getElementsByTagName("strong"), element => element.textContent));
             let x = functions.getRandomInt(txt.length);
-            msg.channel.send(functions.Embeds.setImage("https://hofholistichealingcenters.files.wordpress.com/2012/10/inspired-life-1.jpg").addFields(
+            msg.channel.send(functions.getEmbed().setImage("https://hofholistichealingcenters.files.wordpress.com/2012/10/inspired-life-1.jpg").addFields(
                 { name: "Let's get inspired", value: txt[x] }
             ));
             browser.close();
@@ -78,7 +78,7 @@ module.exports = class Webscraper
             await page.goto(url);
             const txt = await page.evaluate(() => Array.from(document.querySelectorAll(".list"), element => element.textContent));
             let x = functions.getRandomInt(txt.length);
-            msg.channel.send(functions.Embeds.setImage("https://i.imgflip.com/2wakz3.png").addFields(
+            msg.channel.send(functions.getEmbed().setImage("https://i.imgflip.com/2wakz3.png").addFields(
                 { name: "To learn is to grow.", value: txt[x] }
             ));
             setTimeout(function () { msg.channel.send("<:thinking:778611853856997396>"); }, 2000);
