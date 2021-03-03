@@ -2,7 +2,8 @@
 
 ![image](https://user-images.githubusercontent.com/56073739/102880049-a44d6d00-4442-11eb-946e-0f2788b2b560.png)
 
-## Okay this is a bit of a messy one, i made it six months ago but i have come back to it now i know a bit more and added some cool new features
+## ~~Okay this is a bit of a messy one, i made it six months ago but i have come back to it now i know a bit more and added some cool new features~~
+## Crisp and cool bot, utilising oop :sunglasses:. This bot has it all, and i'm chuffed with it!
 
 - This is a web scraping application that can return various data from different websites
 - There are some silly things included
