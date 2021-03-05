@@ -1,30 +1,24 @@
 module.exports =
-    titles = [
-        "Is the String in Order?",
-        "Array of Multiples",
-        "Next Prime",
-        "Length of Number",
-        "Calculate the Profit",
-        "Cricket Balls to Overs!",
-        "Smiley Faces :)",
-        "CAPS LOCK DAY is over!",
-        "Return the Time Saved by Speeding",
-        "C*ns*r*d Str*ngs"
-    ]
-
-    description = [
-        "Create a function that takes a string and returns true or false, depending on whether the characters are in order or not.\ne.g. isInOrder('abc') ➞ trueisInOrder(rabbo') ➞ false",
-        "Create a function that takes two numbers as arguments (num, length) and returns an array of multiples of num until the array length reaches length.\ne.g. arrayOfMult(3, 10) ➞ [3,6,9]",
-        "Given an integer, create a function that returns the next prime. If the number is prime, return the number itself.\ne.g. nextPrime(12) ➞ 13 nextPrime(24) ➞ 29",
-        "Create a function that takes a number num and returns its length.\ne.g. number_length(10) ➞ 2 number_length(5000) ➞ 4\n(The use of the len() function is prohibited.)",
-        "You work for a manufacturer, and have been asked to calculate the total profit made on the sales of a product. You are given a dictionary containing the cost price per unit (in dollars), sell price per unit (in dollars), and the starting inventory. Return the total profit made, rounded to the nearest dollar.\ne.g. profit({" +
-            "'cost_price': 32.67," +
-            "'sell_price': 45.00," +
-            "'inventory': 1200" +
-        "}) ➞ 14796",
-        "In cricket, an over consists of six deliveries a bowler bowls from one end. Create a function that takes the number of balls balls bowled by a bowler and calculates the number of overs and balls bowled by him/her. Return the value as a float, in the format overs.balls.\ne.g. total_overs(2400) ➞ 400 total_overs(164) ➞ 27.2",
-        "You will be given a string of characters containing only the three characters: [( ) :]\nCreate a function returns a number based on the number of sad and smiley faces there are.\nThe happy faces :) and (: are worth 1.\nThe sad faces :( and ): are worth -1.\ne.g. happiness_number(':):(') ➞ -1",
-        "October 22nd is CAPS LOCK DAY. Apart from that day, every sentence should be lowercase, so write a function to normalize a sentence.\nCreate a function that takes a string. If the string is all uppercase characters, convert it to lowercase and add an exclamation mark at the end.\ne.g. normalize('CAPS LOCK DAY IS OVER') ➞ 'Caps lock day is over!', normalize('Today is not caps lock day.') ➞ 'Today is not caps lock day.'",
-        "Create a function that calculates the amount of time saved were you traveling with an average speed that is above the speed-limit as compared to traveling with an average speed exactly at the speed-limit.\ne.g.time_saved(80, 90, 40) ➞ 3.3, time_saved(80, 90, 4000) ➞ 333.3",
-        "Someone has attempted to censor my strings by replacing every vowel with a *, l*k* th*s. Luckily, I've been able to find the vowels that were removed.\ne.g. uncensor('Wh*r* d*d my v*w*ls g*?', 'eeioeo') ➞ 'Where did my vowels go?'"
+    challenges  = [
+        {"name": 'Seven Boom!', "content": 'Create a function that takes an array of numbers and return "Boom!" if the digit 7 appears in the array. Otherwise, return "there is no 7 in the array".'},
+        {"name": 'Phone Number Word Decoder', "content": 'Create a program that converts a phone number with letters to one with only numbers. (e.g. 2 = ABC, 3 = DEF... 7 = PQRS)'},
+        {"name": 'Persistent Little Bugger', "content": 'Create a function that takes a number and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.\nbugger(39) ➞ 3\n// Because 3 * 9 = 27, 2 * 7 = 14, 1 * 4 = 4 and 4 has only one digit.'},
+        {"name": 'Filter out Strings from an Array', "content": 'Create a function that takes an array of non-negative integers and strings and return a new array without the strings.'},
+        {"name": 'No Yelling', "content": 'Create a function that transforms sentences ending with multiple question marks ? or exclamation marks ! into a sentence only ending with one without changing punctuation in the middle of the sentences.'},
+        {"name": 'Building up a Word', "content": 'You are given an input list of strings, ordered by ascending length. Write a function that returns True if, for each pair of consecutive strings, the second string can be formed from the first by adding a single letter either at the beginning or end.\ncan_build(["a", "at", "ate", "late", "plate", "plates"]) ➞ True\ncan_build(["a", "at", "ate", "late", "plate", "plater", "platter"]) ➞ False\n# "platter" is formed by adding "t" in the middle of "plater"'},
+        {"name": 'Reverse Letters, Keep Numbers in Place', "content": 'Create a function that reverses letters in a string but keeps digits in their current order.'},
+        {"name": 'Correct Inequality Signs', "content": 'Create a function that returns true if a given inequality expression is correct and false otherwise.\ne.g.(correctSigns("3 < 7 < 11") ➞ true\ncorrectSigns("13 > 44 > 33 > 1") ➞ false'},
+        {"name": 'Largest Gap', "content": 'Given an array of integers, return the largest gap between the sorted elements of the array.\ne.g.(largestGap([9, 4, 26, 26, 0, 0, 5, 20, 6, 25, 5]) ➞ 11\n// After sorting: [0, 0, 4, 5, 5, 6, 9, 20, 25, 26, 26]'},
+        {"name": 'How Much is True?', "content": 'Create a function which returns the number of true values there are in an array.\ne.g.(countTrue([true, false, false, true, false]) ➞ 2)'},
+        {"name": 'Get Word Count', "content": 'Create a method that takes a string and returns the word count. The string will be a sentence.\ne.g.(countWords("Just an example here move along") ➞ 6)'},
+        {"name": 'Check if String Ending Matches Second String', "content": 'Create a function that takes two strings and returns true if the first string ends with the second string; otherwise return false.\ne.g.(checkEnding("abc", "bc") ➞ true)'},
+        {"name": 'Join Two Portions of a Path', "content": 'Write a function that receives two portions of a path and joins them. The portions will be joined with the "/" separator. There could be only one separator and if it is not present it should be added.\ne.g.(joinPath("portion1", "portion2") ➞ "portion1/portion2"\njoinPath("portion1/", "portion2") ➞ "portion1/portion2"\njoinPath("portion1", "/portion2") ➞ "portion1/portion2"\njoinPath("portion1/", "/portion2") ➞ "portion1/portion2")'},
+        {"name": 'Shuffle the Name', "content": 'Create a method that accepts a string (of a persons first and last name) and returns a string with the first and last name swapped.\ne.g.(nameShuffle("Donald Trump") ➞ "Trump Donald")'},
+        {"name": 'Triangular Number Sequence', "content": 'This Triangular Number Sequence is generated from a pattern of dots that form a triangle. The first 5 numbers of the sequence, or dots, are:\ne.g.((1, 3, 6, 10, 15)\ntriangle(6) ➞ 21)'},
+        {"name": 'Simulate the Game "Rock, Paper, Scissors"', "content": 'Create a function which simulates the game "rock, paper, scissors". The function takes the input of both players (rock, paper or scissors), first parameter from first player, second from second player. The function returns the result as such:\ne.g.(rps("rock", "paper") ➞ "Player 2 wins")'},
+        {"name": 'Video Length in Seconds', "content": 'You are given the length of a video in minutes. The format is mm:ss (e.g.: "02:54"). Create a function that takes the video length and return it in seconds.'},
+        {"name": 'Complete the Word', "content": 'An input string can be completed if additional letters can be added and no letters need to be taken away to match the word. Furthermore, the order of the letters in the input string must be the same as the order of letters in the final word.\nCreate a function that, given an input string, determines if the word can be completed.\ne.g.(canComplete("butl", "beautiful") ➞ true\n// We can add "ea" between "b" and "u", and "ifu" between "t" and "l".\ncanComplete("butlz", "beautiful") ➞ false // "z" does not exist in the word beautiful.\ncanComplete("tulb", "beautiful") ➞ false// Although "t", "u", "l" and "b" all exist in "beautiful", they are incorrectly ordered.\ncanComplete("bbutl", "beautiful") ➞ false// Too many "b"s, beautiful has only 1.'},
+        {"name": 'Basic Pig Latin Translation', "content": 'Create a function that takes a string of words and moves the first letter of each word to the end of it, then adds "ay" to the end of the word. This is called "Pig Latin" and it gets more complicated than the rules in this particular challenge. Ive intentionally kept things simple, otherwise this would turn into an extremely tedious challenge.\ne.g.(pigLatin("Tom got a small piece of pie.")➞ "Omtay otgay away mallsay iecepay ofway iepay."))'},
+        {"name": 'Reverse the String (with a catch)', "content": 'Create a function that takes a string and returns the reversed string. However theres a few rules to follow in order to make the challenge interesting: The UPPERCASE/lowercase positions must be kept in the same order as the original string (see example #1 and #2). Spaces must be kept in the same order as the original string (see example #3).\ne.g.(specialReverseString("Edabit") ➞ "Tibade"\nspecialReverseString("UPPER lower") ➞ "REWOL reppu"\nspecialReverseString("1 23 456") ➞ "6 54 321"'},
+        {"name": 'Edabits Encryption Scheme', "content": 'An English text needs to be encrypted using Edabit’s encryption scheme. First, the spaces are removed from the text. Let L be the length of this text. Then, characters are written into a grid, whose rows and columns have the following constraints: For example, the sentence "if man was meant to stay on the ground god would have given us roots", after removing spaces, is 54 characters long. The square root of 54 is between 7 and 8, so it is written in the form of a grid with 7 rows and 8 columns.\ne.g.(ifmanwas\nmeanttos\ntayonthe\ngroundgo\ndwouldha\nvegivenu\nsroots\nThe encoded message is obtained by displaying the characters in a column, inserting a space, and then displaying the next column and inserting a space, and so on. For example, the encoded message for the above rectangle is:\nimtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn sseoau'}
     ]

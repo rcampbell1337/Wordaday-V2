@@ -1,4 +1,6 @@
 const functions = require('./core_methods');
+const remove = require("../AWS/delete");
+const save = require("../AWS/write");
 
 // This class contains all of the album selectiong methods
 module.exports = class Album 
@@ -49,9 +51,22 @@ module.exports = class Album
                         album_name += args[arg] + " ";
                     }
                 }
+
+                // Delete the message and save / update the database
                 this.msg.channel.bulkDelete(1);
-                this.album_list[this.msg.member.user.username] = album_name;
-                console.log(Object.keys(this.album_list));
+                save.save(this.msg.member.user.username, album_name);
+                for(let i = 0; i < this.album_list.length; i++)
+                {
+                    if (this.album_list[i].discord_user == this.msg.member.user.username)
+                    {
+                        this.album_list.splice(i, 1);
+                    }
+                }
+                this.album_list.push({
+                    "discord_user": this.msg.member.user.username,
+                    "album_name": album_name
+                });
+                console.log(this.album_list);
             }
         }
         else 
@@ -60,17 +75,18 @@ module.exports = class Album
         }
 
         // Tell the user how many albums are in the object
-        if (Object.keys(this.album_list).length == 1)
-            this.msg.channel.send("There is now " + Object.keys(this.album_list).length + " album in the list!");
+        if (this.album_list.length == 1)
+            this.msg.channel.send("There is now " + this.album_list.length + " album in the list!");
         else
-            this.msg.channel.send("There are now " + Object.keys(this.album_list).length + " albums in the list!");
+            this.msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
     }
 
-    // Shows me who has submitted an album in the console
+    // Shows me who has submitted an album in the console and total submissions
     adminGetNames()
     {
         this.msg.channel.bulkDelete(1);
-        console.log(Object.keys(this.album_list));
+        this.album_list.forEach(element => console.log("User: " + element.discord_user));
+        console.log("Total albums: " + this.album_list.length);
     }
 
     // Generates an album from the list already defined, then remove it
@@ -78,27 +94,31 @@ module.exports = class Album
     {
 
         // Get a random album, delete it and send it to users
-        let length_list = Object.keys(this.album_list).length;
+        let length_list = this.album_list.length;
         if (length_list > 0)
         {
             let rand_album = functions.getRandomInt(length_list);
-            let key = Object.keys(this.album_list)[rand_album];
-            let album = this.album_list[key];
+            let album = this.album_list[rand_album];
+
+            // Send the album
             this.msg.channel.send(functions.getEmbed().addFields(
-                { name: "Your chosen album is...", value: album + "!!!" }
+                { name: album.discord_user + " chose the album...", value: album.album_name }
             ));
             this.msg.channel.send("<:hypers:784503728341647430>");
-            delete this.album_list[key];
 
-            if (Object.keys(this.album_list).length == 1)
-                this.msg.channel.send("There is now " + Object.keys(this.album_list).length + " album in the list!");
+            // Remove the album from the db and the local storage
+            this.album_list.splice(rand_album, 1);
+            remove.remove(album.discord_user);
+
+            if (this.album_list.length == 1)
+                this.msg.channel.send("There is now " + this.album_list.length + " album in the list!");
             else
-                this.msg.channel.send("There are now " + Object.keys(this.album_list).length + " albums in the list!");
+                this.msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
     
         }
         else 
         {
-            msg.channel.send("No albums in the list... Why not add your choice now!");
+            this.msg.channel.send("No albums in the list... Why not add your choice now!");
         }
     }
 }

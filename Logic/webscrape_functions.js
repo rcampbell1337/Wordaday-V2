@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const challenges = require("../Data/challenges");
 const functions = require("./core_methods");
 require("../Data/challenges.js");
 
@@ -16,10 +17,19 @@ module.exports = class Webscraper
     // Get a random code challenge from the data list
     getCodeChallenge()
     {
-        let z = functions.getRandomInt(description.length);
-        this.msg.channel.send(functions.getEmbed().setImage(null).addFields(
-            { name: titles[z], value: description[z]}
-        ));
+        if (challenges.length > 0)
+        {
+            let posChosen = functions.getRandomInt(challenges.length);
+            let randomChallenge = challenges[posChosen];
+            this.msg.channel.send(functions.getEmbed().addFields(
+                    { name: randomChallenge.name, value: randomChallenge.content }
+            ));
+            challenges.splice(posChosen, 1);
+        }
+        else
+        {
+            this.msg.channel.send("Good job bambinos! You have done all of the coding challenges!!!")
+        }
     }
 
     // Gets a shakespearean insult from the internet

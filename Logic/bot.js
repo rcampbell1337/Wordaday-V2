@@ -1,5 +1,6 @@
 // Sets up the bot for the apps
 require('dotenv').config();
+const index = require("../AWS/index");
 const Discord = require('discord.js');
 const Rock = require('./rock');
 const Dictionary = require('./dictionary');
@@ -33,7 +34,14 @@ module.exports = class Bot
         this.bot.on('ready', () => {
             console.log("This bot is online");
         });
-        this.album_list = new Object();
+        
+        this.album_list;
+
+        // Convert the promise into a usable dictionary
+        (async () => {
+            this.album_list = await index();
+            console.log("There are already " + this.album_list.length + " albums in the list!")
+        })();
     };
 
     // Handles all prompts from the user
