@@ -1,7 +1,5 @@
 # Wordaday, My discord bot
 
-#### This is a kop out today, but i will be finishing integrating aws tomorrow
-
 # NOW WITH AWS! (for the first time ever!)
 
 ## Crisp and cool bot, utilising oop :sunglasses:. This bot has it all, and i'm chuffed with it!
