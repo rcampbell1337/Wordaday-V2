@@ -1,8 +1,7 @@
 # Wordaday, My discord bot
 
-#### This is a kop out today, but i will be finishing integrating aws tomorrow
+# NOW WITH AWS! (for the first time ever!)
 
-## ~~Okay this is a bit of a messy one, i made it six months ago but i have come back to it now i know a bit more and added some cool new features~~
 ## Crisp and cool bot, utilising oop :sunglasses:. This bot has it all, and i'm chuffed with it!
 _Original version is here: https://github.com/Robbie-Campbell/Discord-Bot_
 
