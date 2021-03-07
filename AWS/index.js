@@ -28,6 +28,5 @@ module.exports = async () => {
         params.ExclusiveStartKey  = items.LastEvaluatedKey;
     }while(typeof items.LastEvaluatedKey != "undefined");
 
-    console.log(scanResults);
     return scanResults;
 };

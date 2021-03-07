@@ -1,7 +1,5 @@
 const puppeteer = require("puppeteer");
-const challenges = require("../Data/challenges");
 const functions = require("./core_methods");
-require("../Data/challenges.js");
 
 
 // This class handles any webscraping standalone methods
@@ -12,24 +10,6 @@ module.exports = class Webscraper
     constructor(msg)
     {
         this.msg = msg;
-    }
-
-    // Get a random code challenge from the data list
-    getCodeChallenge()
-    {
-        if (challenges.length > 0)
-        {
-            let posChosen = functions.getRandomInt(challenges.length);
-            let randomChallenge = challenges[posChosen];
-            this.msg.channel.send(functions.getEmbed().addFields(
-                    { name: randomChallenge.name, value: randomChallenge.content }
-            ));
-            challenges.splice(posChosen, 1);
-        }
-        else
-        {
-            this.msg.channel.send("Good job bambinos! You have done all of the coding challenges!!!")
-        }
     }
 
     // Gets a shakespearean insult from the internet

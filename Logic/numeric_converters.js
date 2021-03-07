@@ -1,5 +1,3 @@
-
-
 // This class converts numbers into computer science values
 module.exports = class Converter
 {

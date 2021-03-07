@@ -10,6 +10,7 @@ const Dice = require('./dice');
 const Converter = require('./numeric_converters')
 const Album = require('./album')
 const Webscraper = require('./webscrape_functions')
+const Challenge = require('./challenges')
 
 // Override the flat function not available to discord current version
 Object.defineProperty(Array.prototype, 'flat', {
@@ -60,6 +61,7 @@ module.exports = class Bot
             const converter = new Converter(msg);
             const album = new Album(msg, this.album_list);
             const webscraper = new Webscraper(msg);
+            const challenge = new Challenge(msg);
 
             // Create a list of arguments for the switch statement
             let args = ["none"];
@@ -175,9 +177,11 @@ module.exports = class Bot
                     webscraper.getInsult(args);
                     break;
 
+                // Coding challenges
                 case "challenge":
-                    webscraper.getCodeChallenge();
+                    challenge.getChallenge(args);
                     break;
+
             }
         })
     }

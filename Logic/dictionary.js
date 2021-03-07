@@ -24,7 +24,7 @@ module.exports = class Dictionary
             const response = await fetch(url);
             const json = await response.json();
             const values = json[0].meta;
-            return this.msg.channel.send(functions.Embeds.addField(title, values.id + "\n" + json[0].hwi.prs[0].mw + "\n" + json[0].shortdef[0]));
+            return this.msg.channel.send(functions.getEmbed().addFields(title, values.id + "\n" + json[0].hwi.prs[0].mw + "\n" + json[0].shortdef[0]));
         } 
         catch
         {
