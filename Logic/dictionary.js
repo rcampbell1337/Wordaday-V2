@@ -15,7 +15,7 @@ module.exports = class Dictionary
     /* This function gets data using a dictionary api and relays it into an embed, 
     using this function both word a day and define can be called. */
     
-    async asyncApiCall(word, title) 
+    async asyncApiCall(word) 
     {
         try 
         {
@@ -24,7 +24,8 @@ module.exports = class Dictionary
             const response = await fetch(url);
             const json = await response.json();
             const values = json[0].meta;
-            return this.msg.channel.send(functions.getEmbed().addFields(title, values.id + "\n" + json[0].hwi.prs[0].mw + "\n" + json[0].shortdef[0]));
+            console.log(json);
+            return this.msg.channel.send(functions.getEmbed().addFields({name: values.id, value: "\n" + json[0].hwi.prs[0].mw + "\n" + json[0].shortdef[0]}));
         } 
         catch
         {
