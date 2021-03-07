@@ -44,7 +44,7 @@ module.exports = class Challenge {
             ]);
             
             // Initialise the embedded response
-            let response = functions.getEmbed().addFields({name: `${msg.member.user.username} your ${args[1]} challenge today is: `, value: `${options[0][functions.getRandomInt(options.length)]}\n GOOD LUCK!`});
+            let response = functions.getEmbed().addFields({name: `${msg.member.user.username} your ${args[1]} challenge today is: `, value: `${options[0][functions.getRandomInt(options[0].length)]}\n GOOD LUCK!`});
             browser.close();
 
             // Set the image of the embed based on the input value
