@@ -85,7 +85,7 @@ module.exports = class Challenge {
         }
 
         // MISTAKE
-        else if (!possible_languages.includes(args[1]))
+        else if (!possible_languages.includes(args[1]) && args[1])
         {
             msg.channel.send(functions.getEmbed().setImage("https://media.istockphoto.com/videos/sad-man-crying-on-the-beach-video-id1067032786?s=640x640").addFields({name: "Oh no...", value: `Sorry, ${args[1]} isn't one of the options, you can choose from:\nPython3\nJava\nCPP\nCsharp\nJavascript\nand you shall be given a test!`}));
         }
