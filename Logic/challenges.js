@@ -15,7 +15,10 @@ module.exports = class Challenge {
 
         // Define function vars
         let msg = this.msg;
-        args[1] = args[1].toLowerCase();
+        if (args[1])
+        {
+            args[1] = args[1].toLowerCase();
+        }
         async function scrapeProduct(url) 
         {
             let options =[];
