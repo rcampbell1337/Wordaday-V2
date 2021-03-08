@@ -66,7 +66,6 @@ module.exports = class Album
                     "discord_user": this.msg.member.user.username,
                     "album_name": album_name
                 });
-                console.log(this.album_list);
             }
         }
         else 
@@ -101,9 +100,12 @@ module.exports = class Album
             let album = this.album_list[rand_album];
 
             // Send the album
-            this.msg.channel.send(functions.getEmbed().addFields(
-                { name: album.discord_user + " chose the album...", value: album.album_name }
-            ));
+            this.msg.channel.send(functions.getEmbed().setImage("https://i.ytimg.com/vi/ygPqPhHRMZo/hqdefault.jpg")
+            .setTitle(album.discord_user + " chose the album...")
+            .setDescription(album.album_name )
+            .setThumbnail(null)
+            .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg')
+            );
             this.msg.channel.send("<:hypers:784503728341647430>");
 
             // Remove the album from the db and the local storage

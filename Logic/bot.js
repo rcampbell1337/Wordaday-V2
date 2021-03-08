@@ -160,7 +160,7 @@ module.exports = class Bot
                     album.adminGetNames();
                     break;
 
-                case "generate_album":
+                case "generate_album_test":
                     album.generateAlbum();
                     break;
 
