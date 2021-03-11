@@ -36,7 +36,7 @@ module.exports = class Challenge {
                 await page.click('div.dropdown[style="margin-top: -2px;"]'),
                 await page.waitForSelector('div.visible.menu.transition'),
                 difficulties = await page.$$('div.visible.transition div.item[aria-selected="false"][role="option"]'),
-                await difficulties[functions.getRandomInt(difficulties.length)].click(),
+                await difficulties[functions.getRandomInt(difficulties.length - 2)].click(),
                 await page.waitForSelector('a.content'),
 
                 // Push the final value into an array
