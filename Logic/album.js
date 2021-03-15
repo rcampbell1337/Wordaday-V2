@@ -18,66 +18,64 @@ module.exports = class Album
     {
 
         // See if the user has submitted an album
-        let add_album = async() => 
-        {
-            try
+        const user_in_list = () => {
+            for(let i = 0; i < this.album_list.length; i++)
             {
-                if (this.msg.member.user.username in album_list)
+                if (this.album_list[i].discord_user == this.msg.member.user.username)
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-            } 
-            catch(e)
-            {
-                console.log(e)
             }
+            return false;
         } 
+        
+        let check_for_user = user_in_list();
 
-        // Append the users name and album choice to the object
-        if (add_album)
-        {
-            if (!args[1]) return this.msg.reply("Error, please enter define an album title");
-            else 
-            {
-                let album_name = "";
-                for (let arg in args)
-                {
-                    if (arg > 0)
-                    {
-                        album_name += args[arg] + " ";
-                    }
-                }
 
-                // Delete the message and save / update the database
-                this.msg.channel.bulkDelete(1);
-                save.save(this.msg.member.user.username, album_name);
-                for(let i = 0; i < this.album_list.length; i++)
-                {
-                    if (this.album_list[i].discord_user == this.msg.member.user.username)
-                    {
-                        this.album_list.splice(i, 1);
-                    }
-                }
-                this.album_list.push({
-                    "discord_user": this.msg.member.user.username,
-                    "album_name": album_name
-                });
-            }
-        }
+        if (!args[1]) return this.msg.reply("Error, please enter define an album title");
         else 
         {
-            return this.msg.reply("You have already chosen an album.");
+            let album_name = "";
+            for (let arg in args)
+            {
+                if (arg > 0)
+                {
+                    album_name += args[arg] + " ";
+                }
+            }
+
+            // Delete the message and save / update the database
+            this.msg.channel.bulkDelete(1);
+            save.save(this.msg.member.user.username, album_name);
+            for(let i = 0; i < this.album_list.length; i++)
+            {
+                if (this.album_list[i].discord_user == this.msg.member.user.username)
+                {
+                    this.album_list.splice(i, 1);
+                }
+            }
+            this.album_list.push({
+                "discord_user": this.msg.member.user.username,
+                "album_name": album_name
+            });
         }
 
-        // Tell the user how many albums are in the object
-        if (this.album_list.length == 1)
-            this.msg.channel.send("There is now " + this.album_list.length + " album in the list!");
-        else
-            this.msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
+        // Tells the user if it an update or if it is a new album
+        if (!check_for_user)
+        {
+            this.msg.channel.send(this.msg.member.user.username + " has entered a new choice!")
+
+            // Tell the user how many albums are in the object
+            if (this.album_list.length == 1)
+                this.msg.channel.send("There is now " + this.album_list.length + " album in the list!");
+            else
+                this.msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
+        }
+
+        else 
+        {
+            this.msg.channel.send(this.msg.member.user.username + " has updated their choice!");
+        }
     }
 
     // Shows me who has submitted an album in the console and total submissions
