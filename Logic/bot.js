@@ -11,6 +11,7 @@ const Converter = require('./numeric_converters')
 const Album = require('./album')
 const Webscraper = require('./webscrape_functions')
 const Challenge = require('./challenges')
+const RandomPerson = require('./random_person')
 
 // Override the flat function not available to discord current version
 Object.defineProperty(Array.prototype, 'flat', {
@@ -37,6 +38,7 @@ module.exports = class Bot
         });
         
         this.album_list;
+        this.person_list = [];
 
         // Convert the promise into a usable dictionary
         (async () => {
@@ -62,6 +64,7 @@ module.exports = class Bot
             const album = new Album(msg, this.album_list);
             const webscraper = new Webscraper(msg);
             const challenge = new Challenge(msg);
+            const random_person = new RandomPerson(msg, this.person_list);
 
             // Create a list of arguments for the switch statement
             let args = ["none"];
@@ -180,6 +183,19 @@ module.exports = class Bot
                 // Coding challenges
                 case "challenge":
                     challenge.getChallenge(args);
+                    break;
+
+                // Random person list
+                case "add_person":
+                    random_person.insertPerson(args);
+                    break;
+
+                case "select_person":
+                    random_person.selectPerson();
+                    break;
+
+                case "reset":
+                    random_person.reset();
                     break;
 
             }

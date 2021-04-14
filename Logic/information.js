@@ -7,7 +7,7 @@ module.exports = class Information
     // Constructor passes in discord message param
     constructor (msg)
     {
-        this.version = "3.0.0";
+        this.version = "3.0.1";
         this.msg = msg;
     }
 
