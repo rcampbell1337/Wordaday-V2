@@ -180,6 +180,10 @@ module.exports = class Bot
                     webscraper.getInsult(args);
                     break;
 
+                case "objects":
+                    webscraper.getRandomObjects();
+                    break;
+
                 // Coding challenges
                 case "challenge":
                     challenge.getChallenge(args);
