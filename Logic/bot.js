@@ -1,6 +1,7 @@
 // Sets up the bot for the apps
 require('dotenv').config();
-const index = require("../AWS/index");
+const album_index = require("../AlbumDatabase/index");
+const object_index = require("../ObjectDatabase/index");
 const Discord = require('discord.js');
 const Rock = require('./rock');
 const Dictionary = require('./dictionary');
@@ -11,7 +12,7 @@ const Converter = require('./numeric_converters')
 const Album = require('./album')
 const Webscraper = require('./webscrape_functions')
 const Challenge = require('./challenges')
-const RandomPerson = require('./random_person')
+const RandomObject = require('./random_object')
 
 // Override the flat function not available to discord current version
 Object.defineProperty(Array.prototype, 'flat', {
@@ -38,11 +39,13 @@ module.exports = class Bot
         });
         
         this.album_list;
-        this.person_list = [];
+        this.object_list;
 
         // Convert the promise into a usable dictionary
         (async () => {
-            this.album_list = await index();
+            this.album_list = await album_index();
+            this.object_list = await object_index();
+            console.log(this.object_list.length);
             console.log("There are already " + this.album_list.length + " albums in the list!")
         })();
     };
@@ -64,7 +67,7 @@ module.exports = class Bot
             const album = new Album(msg, this.album_list);
             const webscraper = new Webscraper(msg);
             const challenge = new Challenge(msg);
-            const random_person = new RandomPerson(msg, this.person_list);
+            const random_person = new RandomObject(msg, this.object_list);
 
             // Create a list of arguments for the switch statement
             let args = ["none"];
@@ -190,16 +193,12 @@ module.exports = class Bot
                     break;
 
                 // Random person list
-                case "add_person":
-                    random_person.insertPerson(args);
+                case "add_object":
+                    random_person.insertObject(args);
                     break;
 
-                case "select_person":
-                    random_person.selectPerson();
-                    break;
-
-                case "reset":
-                    random_person.reset();
+                case "select_object":
+                    random_person.selectObject();
                     break;
 
             }

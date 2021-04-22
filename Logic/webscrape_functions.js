@@ -77,26 +77,4 @@ module.exports = class Webscraper
         let page = functions.getRandomInt(6);
         teachMe(`https://www.thefactsite.com/1000-interesting-facts/${page}`)
     }
-
-    // Get a list of 6 random objects
-    getRandomObjects()
-    {
-
-        let msg = this.msg;
-
-        async function getRandObj(url) 
-        {
-            const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-            const page = await browser.newPage();
-            await page.goto(url);
-            const results = await page.evaluate(() => Array.from(document.querySelectorAll(".rand_medium"), element => element.textContent));
-            console.log(results);
-            for (let i = 0; i < results.length - 4; i++)
-            {
-                msg.channel.send(results[i]);
-            }
-            browser.close();
-        }
-        getRandObj(`https://www.randomlists.com/things`)
-    }
 }

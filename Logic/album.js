@@ -1,6 +1,6 @@
 const functions = require('./core_methods');
-const remove = require("../AWS/delete");
-const save = require("../AWS/write");
+const remove = require("../AlbumDatabase/delete");
+const save = require("../AlbumDatabase/write");
 
 // This class contains all of the album selectiong methods
 module.exports = class Album 
