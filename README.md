@@ -21,6 +21,7 @@ _Original version is here: https://github.com/Robbie-Campbell/Discord-Bot_
 5. Rock name Guessing game
 6. Return a random inspirational quote
 7. Return a random fact
+8. Add and select objects added to a list stored with AWS
 
 ### The boring stuff
 1. Sends a few memey GIFS (This was an early feature, not particularly helpful)
