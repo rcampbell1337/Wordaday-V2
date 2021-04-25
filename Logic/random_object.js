@@ -16,7 +16,7 @@ module.exports = class Randomobject
     // Insert a object into the temporary list
     insertObject(args)
     {
-        if (!args[1]) return this.msg.reply("Error, please enter define an album title");
+        if (!args[1]) return this.msg.reply("Error, please enter define an object title");
         else
         {
             let object = "";
