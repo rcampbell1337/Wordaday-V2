@@ -16,21 +16,25 @@ module.exports = class Randomobject
     // Insert a object into the temporary list
     insertObject(args)
     {
-        let object = "";
-        for (let arg in args)
+        if (!args[1]) return this.msg.reply("Error, please enter define an album title");
+        else
         {
-            if (arg > 0)
+            let object = "";
+            for (let arg in args)
             {
-                object += args[arg] + " ";
+                if (arg > 0)
+                {
+                    object += args[arg] + " ";
+                }
             }
+            let uuid = uuidv4();
+            save.save(uuid, object);
+            this.object_list.push({
+                "object_id": uuid,
+                "object": object
+            });
+            this.msg.channel.send(object + "added!");
         }
-        let uuid = uuidv4();
-        save.save(uuid, object);
-        this.object_list.push({
-            "object_id": uuid,
-            "object": object
-        });
-        this.msg.channel.send(object + "added!");
     }
 
     // Gets a random object from the list
