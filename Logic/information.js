@@ -52,7 +52,7 @@ module.exports = class Information
             { name: "Numerical functions", value: "bin, oct, hex" },
             { name: "Functionality", value: "info, help, hello, code, ping" },
             { name: "Albums", value: "album, generate_album" },
-            { name: "Objects", value: "add_object, select_object" },
+            { name: "Objects", value: "addobject, object" },
             { name: "Generate a random name", value: "add_person, select_person, reset" },
             { name: "Dictionary functions!", value: "word, define" },
             { name: "Play a game!", value: "rock" },

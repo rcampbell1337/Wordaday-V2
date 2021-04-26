@@ -193,11 +193,11 @@ module.exports = class Bot
                     break;
 
                 // Random person list
-                case "add_object":
+                case "addobject":
                     random_person.insertObject(args);
                     break;
 
-                case "select_object":
+                case "object":
                     random_person.selectObject();
                     break;
 
