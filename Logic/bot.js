@@ -162,6 +162,11 @@ module.exports = class Bot
                     album.addAlbum(args);
                     break;
 
+                // Album functions
+                case "t":
+                    album.generateImage(args);
+                    break;
+
                 case "admin_get_names":
                     album.adminGetNames();
                     break;

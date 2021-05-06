@@ -121,4 +121,60 @@ module.exports = class Album
             this.msg.channel.send("No albums in the list... Why not add your choice now!");
         }
     }
+
+    // Generates an album from the list already defined, then remove it
+    generateImage()
+    {
+
+        // Get a random album, delete it and send it to users
+        let obj = {
+            "discord_user": "Robbie",
+            "album_name": "Appetite for destruction by Guns n Roses",
+        }
+        let album_test = [obj];
+        let length_list = album_test.length;
+        let msg = this.msg;
+        if (length_list > 0)
+        {
+            async function getImage()
+            {
+                let rand_album = functions.getRandomInt(length_list);
+                let album = album_test[rand_album];
+                let temp;
+                let image;
+                await Promise.all([
+                    temp = functions.gsearch(album.album_name),
+                    console.log(temp)
+                ]);
+
+                (async () => {
+                    image = await temp;
+                })();
+
+                console.log(image);
+                // Send the album
+                msg.channel.send(functions.getEmbed().setImage(image)
+                .setTitle(album.discord_user + " chose the album...")
+                .setDescription(album.album_name )
+                .setThumbnail(null)
+                .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg')
+                );
+                msg.channel.send("<:hypers:784503728341647430>");
+
+                // Remove the album from the db and the local storage
+                // test.splice(rand_album, 1);
+                // remove.remove(album.discord_user);
+
+                if (album_test.length == 1)
+                    msg.channel.send("There is now " + album_test.length + " album in the list!");
+                else
+                    msg.channel.send("There are now " + album_test.length + " albums in the list!");
+            }
+            getImage();
+        }
+        else 
+        {
+            this.msg.channel.send("No albums in the list... Why not add your choice now!");
+        }
+    }
 }
