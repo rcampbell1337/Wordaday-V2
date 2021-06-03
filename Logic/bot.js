@@ -162,11 +162,6 @@ module.exports = class Bot
                     album.addAlbum(args);
                     break;
 
-                // Album functions
-                case "t":
-                    album.generateImage(args);
-                    break;
-
                 case "admin_get_names":
                     album.adminGetNames();
                     break;
@@ -186,10 +181,6 @@ module.exports = class Bot
 
                 case "insult":
                     webscraper.getInsult(args);
-                    break;
-
-                case "objects":
-                    webscraper.getRandomObjects();
                     break;
 
                 // Coding challenges

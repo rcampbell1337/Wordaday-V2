@@ -86,91 +86,82 @@ module.exports = class Album
         console.log("Total albums: " + this.album_list.length);
     }
 
+    // // Generates an album from the list already defined, then remove it
+    // generateAlbum()
+    // {
+
+    //     // Get a random album, delete it and send it to users
+    //     let length_list = this.album_list.length;
+    //     if (length_list > 0)
+    //     {
+    //         let rand_album = functions.getRandomInt(length_list);
+    //         let album = this.album_list[rand_album];
+
+    //         // Send the album
+    //         this.msg.channel.send(functions.getEmbed().setImage()
+    //         .setTitle(album.discord_user + " chose the album...")
+    //         .setDescription(album.album_name )
+    //         .setThumbnail(null)
+    //         .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg')
+    //         );
+    //         this.msg.channel.send("<:hypers:784503728341647430>");
+
+    //         // Remove the album from the db and the local storage
+    //         this.album_list.splice(rand_album, 1);
+    //         remove.remove(album.discord_user);
+
+    //         if (this.album_list.length == 1)
+    //             this.msg.channel.send("There is now " + this.album_list.length + " album in the list!");
+    //         else
+    //             this.msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
+    
+    //     }
+    //     else 
+    //     {
+    //         this.msg.channel.send("No albums in the list... Why not add your choice now!");
+    //     }
+    // }
+
     // Generates an album from the list already defined, then remove it
     generateAlbum()
     {
 
-        // Get a random album, delete it and send it to users
         let length_list = this.album_list.length;
-        if (length_list > 0)
-        {
-            let rand_album = functions.getRandomInt(length_list);
-            let album = this.album_list[rand_album];
-
-            // Send the album
-            this.msg.channel.send(functions.getEmbed().setImage("https://i.ytimg.com/vi/ygPqPhHRMZo/hqdefault.jpg")
-            .setTitle(album.discord_user + " chose the album...")
-            .setDescription(album.album_name )
-            .setThumbnail(null)
-            .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg')
-            );
-            this.msg.channel.send("<:hypers:784503728341647430>");
-
-            // Remove the album from the db and the local storage
-            this.album_list.splice(rand_album, 1);
-            remove.remove(album.discord_user);
-
-            if (this.album_list.length == 1)
-                this.msg.channel.send("There is now " + this.album_list.length + " album in the list!");
-            else
-                this.msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
-    
-        }
-        else 
-        {
-            this.msg.channel.send("No albums in the list... Why not add your choice now!");
-        }
-    }
-
-    // Generates an album from the list already defined, then remove it
-    generateImage()
-    {
-
-        // Get a random album, delete it and send it to users
-        let obj = {
-            "discord_user": "Robbie",
-            "album_name": "Appetite for destruction by Guns n Roses",
-        }
-        let album_test = [obj];
-        let length_list = album_test.length;
         let msg = this.msg;
+        let rand_album = functions.getRandomInt(length_list);
+        let album = this.album_list[rand_album];
         if (length_list > 0)
         {
-            async function getImage()
-            {
-                let rand_album = functions.getRandomInt(length_list);
-                let album = album_test[rand_album];
-                let temp;
-                let image;
-                await Promise.all([
-                    temp = functions.gsearch(album.album_name),
-                    console.log(temp)
-                ]);
-
-                (async () => {
+            let temp;
+            let image;
+            Promise.all([
+                temp = Promise.resolve(functions.gsearchimage(album.album_name)),
+                (async() => {
                     image = await temp;
-                })();
-
-                console.log(image);
-                // Send the album
+                })()
+            ])
+            .then((values) => {
                 msg.channel.send(functions.getEmbed().setImage(image)
                 .setTitle(album.discord_user + " chose the album...")
                 .setDescription(album.album_name )
                 .setThumbnail(null)
                 .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg')
-                );
-                msg.channel.send("<:hypers:784503728341647430>");
+            );
 
                 // Remove the album from the db and the local storage
-                // test.splice(rand_album, 1);
-                // remove.remove(album.discord_user);
+                this.album_list.splice(rand_album, 1);
+                remove.remove(album.discord_user);
 
-                if (album_test.length == 1)
+                if (album_test.length == 1) {
                     msg.channel.send("There is now " + album_test.length + " album in the list!");
-                else
+                }
+                else {
                     msg.channel.send("There are now " + album_test.length + " albums in the list!");
-            }
-            getImage();
+                }
+            })
+            .catch(error => {
+                console.error(error.message)
+            });
         }
         else 
         {
