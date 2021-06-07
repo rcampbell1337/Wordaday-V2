@@ -57,7 +57,7 @@ module.exports = class Information
             { name: "Dictionary functions!", value: "word, define" },
             { name: "Play a game!", value: "rock" },
             { name: "Other Cool Stuff!!", value: "inspire, insult, fact, challenge" },
-            { name: "Dice Rolls Type dice then:", value: "20, 12, 10, 8, 6, 4" }
+            { name: "Dice Rolls\nType 'dice' then:", value: "20, 12, 10, 8, 6, 4" }
         ));
     }
 
