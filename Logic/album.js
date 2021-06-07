@@ -152,11 +152,11 @@ module.exports = class Album
                 this.album_list.splice(rand_album, 1);
                 remove.remove(album.discord_user);
 
-                if (album_test.length == 1) {
-                    msg.channel.send("There is now " + album_test.length + " album in the list!");
+                if (this.album_list.length == 1) {
+                    msg.channel.send("There is now " + this.album_list.length + " album in the list!");
                 }
                 else {
-                    msg.channel.send("There are now " + album_test.length + " albums in the list!");
+                    msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
                 }
             })
             .catch(error => {

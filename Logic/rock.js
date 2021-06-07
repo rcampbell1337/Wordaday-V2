@@ -44,6 +44,8 @@ module.exports = class Rock
                 { name: "Guess the rock!!!", value: "WHAT COULD IT BE?! (Type your guess after the B!guess keyword!)" }
             ));
             this.setRock(text[x]);
+            console.log(text[x]);
+            console.log(this.getRock());
             browser.close();
         }
         newProduct("https://geology.com/rocks/");
@@ -57,16 +59,16 @@ module.exports = class Rock
         if (this.getRock() == "null") {
             this.msg.channel.send("Please ask for a Rock First...")
         }
-        else if (args.length == 3 && args[1].toLowerCase() + " " + args[2].toLowerCase() == getRock().toLowerCase()) {
-            this.msg.channel.send("Congratulations! The rock is " + getRock());
+        else if (args.length == 3 && args[1].toLowerCase() + " " + args[2].toLowerCase() == this.getRock().toLowerCase()) {
+            this.msg.channel.send("Congratulations! The rock is " + this.getRock());
             this.setRock("null");
         }
-        else if (args[1].toLowerCase() == getRock().toLowerCase()) {
-            this.msg.channel.send("Congratulations! The rock is " + getRock());
+        else if (args[1].toLowerCase() == this.getRock().toLowerCase()) {
+            this.msg.channel.send("Congratulations! The rock is " + this.getRock());
             this.setRock("null");
         }
         else {
-            this.msg.channel.send("OOOOF Close but no cigar! The rock was " + getRock());
+            this.msg.channel.send("OOOOF Close but no cigar! The rock was " + this.getRock());
             this.setRock("null");
         }
     }
