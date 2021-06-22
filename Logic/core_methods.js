@@ -1,6 +1,4 @@
 const Discord = require('discord.js');
-const puppeteer = require('puppeteer');
-const getFirstImageURL = require('first-image-search-load');
 
 
 // Creates an embed option, abitlity to change aspects will be added later
@@ -23,11 +21,11 @@ function getRandomInt(max)
     return Math.floor(Math.random() * Math.floor(max));
 }
 // Gets the first result of a google image search
-function gsearchimage(query) 
-{
-  return getFirstImageURL.getFirstImageURL(query);
-}
+// function gsearchimage(query) 
+// {
+//   return getFirstImageURL.getFirstImageURL(query);
+// }
 
 exports.getEmbed = getEmbed;
-exports.gsearchimage = gsearchimage;
+// exports.gsearchimage = gsearchimage;
 exports.getRandomInt = getRandomInt;

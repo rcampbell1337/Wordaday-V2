@@ -132,21 +132,11 @@ module.exports = class Album
         let album = this.album_list[rand_album];
         if (length_list > 0)
         {
-            let temp;
-            let image;
-            Promise.all([
-                temp = Promise.resolve(functions.gsearchimage(album.album_name)),
-                (async() => {
-                    image = await temp;
-                })()
-            ])
-            .then((values) => {
-                msg.channel.send(functions.getEmbed().setImage(image)
+                msg.channel.send(functions.getEmbed().setImage('https://i.pinimg.com/originals/83/f6/23/83f623246c3043e74f2c1bc6bae1ef8d.jpg')
                 .setTitle(album.discord_user + " chose the album...")
                 .setDescription(album.album_name )
                 .setThumbnail(null)
-                .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg')
-            );
+                .setFooter('Have fun with it!', 'https://i.pinimg.com/736x/3c/88/c8/3c88c8510028f627cf58792795629ed1.jpg'));
 
                 // Remove the album from the db and the local storage
                 this.album_list.splice(rand_album, 1);
@@ -158,10 +148,6 @@ module.exports = class Album
                 else {
                     msg.channel.send("There are now " + this.album_list.length + " albums in the list!");
                 }
-            })
-            .catch(error => {
-                console.error(error.message)
-            });
         }
         else 
         {
