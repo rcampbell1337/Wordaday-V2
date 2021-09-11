@@ -6,9 +6,15 @@ module.exports = class SmashAPI {
         this.msg = msg;
     }
 
+    getAllCharacterNames(words) {
+        return words.slice(1).join("");
+    }
+
     makeRequestToSmashAPI(character_name) {
-        character_name = character_name[1];
-        let api_url = `https://api.kuroganehammer.com/api/characters/name/${character_name}/movements?game=ultimate`;
+        let character_name_for_api = this.getAllCharacterNames(character_name);
+        character_name = character_name.join(" ");
+        let api_url = `https://api.kuroganehammer.com/api/characters/name/${character_name_for_api}/movements`;
+        console.log(api_url);
         axios.get(api_url).then(response => {
             if (response.data.length > 0 && response.status == 200) {
                 let character_data = "";
