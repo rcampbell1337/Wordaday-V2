@@ -33,9 +33,9 @@ module.exports = class Bot
     {
         this.prefix = "b!";
         this.token = process.env.BOT_VAR;
-        this.bot = new Discord.Client();
-        this.bot.login(this.token);
-        this.bot.on('ready', () => {
+        this.client = new Discord.Client();
+        this.client.login(this.token);
+        this.client.on('ready', () => {
             console.log("This bot is online");
         });
         
@@ -55,7 +55,7 @@ module.exports = class Bot
     bot_on()
     {
         // When a message is sent
-        this.bot.on('message', msg => 
+        this.client.on('message', msg => 
         {
 
             // Create instances of all classes

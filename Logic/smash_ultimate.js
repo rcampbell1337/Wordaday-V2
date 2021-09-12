@@ -1,6 +1,5 @@
 const axios = require("axios");
 const functions = require("./core_methods");
-const assert = require("assert")
 
 module.exports = class SmashAPI {
     constructor(msg) {
