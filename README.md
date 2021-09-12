@@ -28,4 +28,6 @@ _Original version is here: https://github.com/Robbie-Campbell/Discord-Bot_
 2. Gives version info and my author info
 3. A pretty bad ping test
 
+#### Testing coming soon!!!
+
 ## :shipit: Not much else to say with this one, other than enjoy! :shipit:
