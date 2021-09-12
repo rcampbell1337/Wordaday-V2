@@ -1,10 +1,13 @@
 const axios = require("axios");
 const functions = require("./core_methods");
+const assert = require("assert")
 
 module.exports = class SmashAPI {
     constructor(msg) {
         this.msg = msg;
     }
+
+    testResponseFromAPI
 
     getAllCharacterNames(words) {
         return words.slice(1).join("");
@@ -14,7 +17,6 @@ module.exports = class SmashAPI {
         let character_name_for_api = this.getAllCharacterNames(character_name);
         character_name = character_name.join(" ");
         let api_url = `https://api.kuroganehammer.com/api/characters/name/${character_name_for_api}/movements`;
-        console.log(api_url);
         axios.get(api_url).then(response => {
             if (response.data.length > 0 && response.status == 200) {
                 let character_data = "";
