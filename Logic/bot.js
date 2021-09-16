@@ -14,6 +14,7 @@ const Webscraper = require('./webscrape_functions')
 const Challenge = require('./challenges')
 const RandomObject = require('./random_object');
 const SmashAPI = require('./smash_ultimate');
+const MusicPlayer = require('./music');
 
 // Override the flat function not available to discord current version
 Object.defineProperty(Array.prototype, 'flat', {
@@ -70,6 +71,7 @@ module.exports = class Bot
             const challenge = new Challenge(msg);
             const random_person = new RandomObject(msg, this.object_list);
             const smash_data = new SmashAPI(msg);
+            const music_player = new MusicPlayer(msg);
 
             // Create a list of arguments for the switch statement
             let args = ["none"];
@@ -201,6 +203,10 @@ module.exports = class Bot
                 
                 case "smash":
                     smash_data.makeRequestToSmashAPI(args);
+                    break;
+
+                case "play":
+                    music_player.execute(args);
                     break;
 
             }
