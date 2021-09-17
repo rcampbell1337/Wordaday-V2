@@ -48,6 +48,7 @@ module.exports = class Information
     {
         this.msg.channel.send(functions.getEmbed().addFields(
             { name: "Command List", value: 'All commands start with B!' },
+            { name: "Music", value: "play, skip, stop, sp (place a spotify playlist url after this one)"},
             { name: "Memes", value: "simp, jojo, opm, sucks" },
             { name: "Numerical functions", value: "bin, oct, hex" },
             { name: "Functionality", value: "info, help, hello, code, ping" },
