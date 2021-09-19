@@ -207,8 +207,8 @@ module.exports = class Bot
                     smash_data.makeRequestToSmashAPI(args);
                     break;
 
-                case "play":
-                    music_player.execute(args);
+                case "p":
+                    music_player.execute(args, true);
                     break;
 
                 case "skip":
@@ -219,8 +219,13 @@ module.exports = class Bot
                     music_player.stop(serverQueue);
                     break;
                 
-                case "sp":
+                case "spot":
+                    msg.channel.send("Please wait a moment, this might take a little while to load...");
                     music_player.getSongsFromSpotifyPlaylist(args);
+                    break;
+                
+                case "shuffle":
+                    music_player.shuffle();
                     break;
 
             }
