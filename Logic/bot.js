@@ -207,7 +207,7 @@ module.exports = class Bot
                     smash_data.makeRequestToSmashAPI(args);
                     break;
 
-                case "p":
+                case "play":
                     music_player.execute(args, true);
                     break;
 
