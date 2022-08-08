@@ -1,7 +1,6 @@
 const functions = require('./core_methods');
-const remove = require("../ObjectDatabase/delete");
 const { v4: uuidv4 } = require('uuid');
-const save = require("../ObjectDatabase/write");
+const ObjectDatabase = require('../DynamoDB/DataHelpers/object_database');
 
 // This class takes in people and generates a random one
 module.exports = class Randomobject
@@ -11,12 +10,13 @@ module.exports = class Randomobject
     {
         this.msg = msg;
         this.object_list = object_list;
+        this.object_database = new ObjectDatabase();
     }
 
     // Insert a object into the temporary list
     insertObject(args)
     {
-        if (!args[1]) return this.msg.reply("Error, please enter define an object title");
+        if (!args[1]) return this.msg.reply("Error, please define an object title");
         else
         {
             let object = "";
@@ -28,8 +28,7 @@ module.exports = class Randomobject
                 }
             }
             let uuid = uuidv4();
-            save.save(uuid, object);
-            this.object_list.push({
+            this.object_database.write({
                 "object_id": uuid,
                 "object": object
             });
@@ -47,7 +46,7 @@ module.exports = class Randomobject
             this.msg.channel.send(value.object);
             console.log(this.object_list.length);
             this.object_list.splice(object_index, 1);
-            remove.remove(value.object_id);
+            this.object_database.remove(value.object_id);
         }
         else
         {

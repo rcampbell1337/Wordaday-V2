@@ -1,7 +1,5 @@
 // Sets up the bot for the apps
 require('dotenv').config();
-const album_index = require("../AlbumDatabase/index");
-const object_index = require("../ObjectDatabase/index");
 const Discord = require('discord.js');
 const Rock = require('./rock');
 const Dictionary = require('./dictionary');
@@ -14,6 +12,10 @@ const Webscraper = require('./webscrape_functions')
 const Challenge = require('./challenges')
 const RandomObject = require('./random_object');
 const SmashAPI = require('./smash_ultimate');
+const ObjectDatabase = require('../DynamoDB/DataHelpers/object_database');
+const AlbumDatabase = require('../DynamoDB/DataHelpers/album_database');
+const FilmDatabase = require('../DynamoDB/DataHelpers/film_database');
+const Film = require('./film');
 
 // Override the flat function not available to discord current version
 Object.defineProperty(Array.prototype, 'flat', {
@@ -41,11 +43,13 @@ module.exports = class Bot
         
         this.album_list;
         this.object_list;
+        this.film_list;
 
         // Convert the promise into a usable dictionary
         (async () => {
-            this.album_list = await album_index();
-            this.object_list = await object_index();
+            this.album_list = await new AlbumDatabase().index();
+            this.object_list = await new ObjectDatabase().index();
+            this.film_list = await new FilmDatabase().index();
             console.log(this.object_list.length);
             console.log("There are already " + this.album_list.length + " albums in the list!")
         })();
@@ -69,6 +73,7 @@ module.exports = class Bot
             const webscraper = new Webscraper(msg);
             const challenge = new Challenge(msg);
             const random_person = new RandomObject(msg, this.object_list);
+            const film = new Film(msg, this.film_list);
             const smash_data = new SmashAPI(msg);
 
             // Create a list of arguments for the switch statement
@@ -160,7 +165,7 @@ module.exports = class Bot
                     break;
 
                 // Album functions
-                case "album":
+                case "add_album":
                     album.addAlbum(args);
                     break;
 
@@ -170,6 +175,15 @@ module.exports = class Bot
 
                 case "generate_album":
                     album.generateAlbum();
+                    break;
+
+                // Film functions
+                case "add_film":
+                    film.addFilm(args);
+                    break;
+
+                case "generate_film":
+                    film.generateFilm();
                     break;
 
                 // Webscraping functions
@@ -191,11 +205,11 @@ module.exports = class Bot
                     break;
 
                 // Random person list
-                case "addobject":
+                case "add_object":
                     random_person.insertObject(args);
                     break;
 
-                case "object":
+                case "generate_object":
                     random_person.selectObject();
                     break;
                 

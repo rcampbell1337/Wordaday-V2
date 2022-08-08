@@ -16,7 +16,6 @@ module.exports = class Webscraper
     getInsult(args)
     {
         let msg = this.msg;
-
         async function scrapeProduct(url) 
         {
             const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });

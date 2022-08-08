@@ -1,6 +1,5 @@
 const functions = require('./core_methods');
-const remove = require("../AlbumDatabase/delete");
-const save = require("../AlbumDatabase/write");
+const AlbumDatabase = require('../DynamoDB/DataHelpers/album_database');
 
 // This class contains all of the album selectiong methods
 module.exports = class Album 
@@ -11,10 +10,11 @@ module.exports = class Album
     {
         this.msg = msg;
         this.album_list = album_list;
+        this.album_database = new AlbumDatabase();
     }
 
     // Adds an album to the list
-    addAlbum(args)
+    async addAlbum(args)
     {
 
         // See if the user has submitted an album
@@ -32,7 +32,7 @@ module.exports = class Album
         let check_for_user = user_in_list();
 
 
-        if (!args[1]) return this.msg.reply("Error, please enter define an album title");
+        if (!args[1]) return this.msg.reply("Error, please enter an album title");
         else 
         {
             let album_name = "";
@@ -46,7 +46,6 @@ module.exports = class Album
 
             // Delete the message and save / update the database
             this.msg.channel.bulkDelete(1);
-            save.save(this.msg.member.user.username, album_name);
             for(let i = 0; i < this.album_list.length; i++)
             {
                 if (this.album_list[i].discord_user == this.msg.member.user.username)
@@ -54,10 +53,14 @@ module.exports = class Album
                     this.album_list.splice(i, 1);
                 }
             }
-            this.album_list.push({
+            let data = {
                 "discord_user": this.msg.member.user.username,
                 "album_name": album_name
-            });
+            }
+
+            this.album_database.write(data);
+
+            this.album_list.push(data);
         }
 
         // Tells the user if it an update or if it is a new album
@@ -140,7 +143,7 @@ module.exports = class Album
 
                 // Remove the album from the db and the local storage
                 this.album_list.splice(rand_album, 1);
-                remove.remove(album.discord_user);
+                this.album_database.remove(album.discord_user);
 
                 if (this.album_list.length == 1) {
                     msg.channel.send("There is now " + this.album_list.length + " album in the list!");
