@@ -16,6 +16,8 @@ const ObjectDatabase = require('../DynamoDB/DataHelpers/object_database');
 const AlbumDatabase = require('../DynamoDB/DataHelpers/album_database');
 const FilmDatabase = require('../DynamoDB/DataHelpers/film_database');
 const Film = require('./film');
+const MusicPlayer = require('./music');
+const queue = new Map();
 
 // Override the flat function not available to discord current version
 Object.defineProperty(Array.prototype, 'flat', {
@@ -75,6 +77,8 @@ module.exports = class Bot
             const random_person = new RandomObject(msg, this.object_list);
             const film = new Film(msg, this.film_list);
             const smash_data = new SmashAPI(msg);
+            const serverQueue = queue.get(msg.guild.id);
+            const music_player = new MusicPlayer(msg, serverQueue, queue);
 
             // Create a list of arguments for the switch statement
             let args = ["none"];
@@ -215,6 +219,27 @@ module.exports = class Bot
                 
                 case "smash":
                     smash_data.makeRequestToSmashAPI(args);
+                    break;
+
+                case "play":
+                    music_player.execute(args, true);
+                    break;
+
+                case "skip":
+                    music_player.skip(serverQueue);
+                    break;
+
+                case "stop":
+                    music_player.stop(serverQueue);
+                    break;
+                
+                case "spot":
+                    msg.channel.send("Please wait a moment, this might take a little while to load...");
+                    music_player.getSongsFromSpotifyPlaylist(args);
+                    break;
+                
+                case "shuffle":
+                    music_player.shuffle();
                     break;
 
             }

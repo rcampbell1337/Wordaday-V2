@@ -30,6 +30,6 @@ module.exports = class SmashAPI {
           })
           .catch(error => {
             console.log(error);
-          });
+        });
     }
 }

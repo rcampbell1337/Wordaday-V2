@@ -30,4 +30,6 @@ _Original version is here: https://github.com/Robbie-Campbell/Discord-Bot_
 
 #### Testing coming soon!!!
 
+### Now with music!
+
 ## :shipit: Not much else to say with this one, other than enjoy! :shipit:
